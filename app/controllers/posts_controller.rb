@@ -26,13 +26,14 @@ class PostsController < ApplicationController
   def create
       @post = Post.new(post_params)
     respond_to do |format|
-      if @post.user_id == current_user.id
+      if @post.user_id != current_user.id
+	format.html { redirect_to @post, notice: 'Post wasn\'t successfully created.' }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      else
+
 	@post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
