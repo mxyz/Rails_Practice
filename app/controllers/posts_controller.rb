@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @user = current_user
   end
 
   # GET /posts/1
@@ -27,7 +28,7 @@ class PostsController < ApplicationController
       @post = Post.new(post_params)
     respond_to do |format|
       if @post.user_id != current_user.id
-	format.html { redirect_to @post, notice: 'Post wasn\'t successfully created.' }
+	format.html { redirect_to @post, notice: 'Post was unsuccessfully created.' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       else
 
