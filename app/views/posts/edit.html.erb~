@@ -2,15 +2,21 @@
 
 <%= render 'form' %>
 
+<%='Added tags' %>
+<br>
 <% @post.tags.each do |temptag1| %>
 <%= temptag1.name %>
 <%= link_to 'Remove', '/posts/'+@post.id.to_s+'/removetag/'+temptag1.id.to_s+'/' %> 	
 <br>
 <% end %>
+<br>
+<%= 'tag lists' %>
+<br>
 <% @allTag.each do |temptag2| %>
 <%= temptag2.name %>
-<%= link_to 'Add', '/posts/'+@post.id.to_s+'/addtag/'+temptag1.id.to_s+'/' %>
+<%= link_to 'Add', '/posts/'+@post.id.to_s+'/addtag/'+temptag2.id.to_s+'/' %>
 <br>
 <% end %>
+<br>
 <%= link_to 'Show', @post %> |
 <%= link_to 'Back', posts_path %>
