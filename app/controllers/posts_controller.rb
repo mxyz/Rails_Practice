@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :removetag, :addtag]
 
   # GET /posts
   # GET /posts.json
@@ -18,9 +18,30 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def removetag
+    deletetag = Tag.find(params[:tag_id])
+    @post.tags.delete(deletetag)
+    redirect_to edit_post_path
+  end
+
+  def addtag
+    addtag = Tag.find(params[:tag_id])
+    @post.tags << addtag
+    redirect_to edit_post_path
+  end
+
   # GET /posts/1/edit
   def edit
-  end
+    @allTag = Tag.all 
+    @allTag = @allTag.to_a
+    @post.tags.each do |tag| 
+      @allTag.each do |tag2| 
+        if ( tag.id == tag2.id ) 
+          @allTag.delete(tag2) 
+        end
+      end
+    end
+ end
 
   # POST /posts
   # POST /posts.json
@@ -42,6 +63,9 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+@tag = Tag.find(4)
+@post.tags << @tag
+	#logger.debug 'count = ' + @post.tags.count.to_s + ' tag count = ' + temptag.posts.count.to_s
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }

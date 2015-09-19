@@ -4,10 +4,11 @@
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
-<%@posts = Post.where(user_id: @user.id)%>
-<% @posts.each do |post| %>
-<%= post.title %><br>
+<%@allpostwithtag = @tag.posts%>
+<% @allpostwithtag.each do |post| %>
+<%= post.title %>
 <%= link_to 'Edit', edit_post_path(post) %>
+<br>
 <% end %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
