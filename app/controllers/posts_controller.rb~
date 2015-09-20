@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 
   def addtag
     addtag = Tag.find(params[:tag_id])
-    @post.tags.add(addtag)
+    @post.tags << addtag
     redirect_to edit_post_path
   end
 

@@ -63,8 +63,6 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-@tag = Tag.find(4)
-@post.tags << @tag
 	#logger.debug 'count = ' + @post.tags.count.to_s + ' tag count = ' + temptag.posts.count.to_s
     respond_to do |format|
       if @post.update(post_params)

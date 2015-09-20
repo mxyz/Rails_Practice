@@ -16,7 +16,6 @@
 </p>
 <%@post.tags.each do |temptag| %>
 <%= temptag.name %>
-<br>
 <% end %>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
